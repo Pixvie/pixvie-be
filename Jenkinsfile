@@ -6,8 +6,14 @@ pipeline {
             steps {
                 echo 'Build.'
                 sh 'npm install'
-                sh '(npm run start&) > /dev/null'
+                
             }
         }
     }
+    post {
+        success {
+            sh 'npm run start'
+
+    }
+  }
 }
