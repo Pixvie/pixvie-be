@@ -5,8 +5,9 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Build.'
-                sh 'npm install'
-                sh 'npm run start'
+                sh 'sudo docker stop pixvie-backend'
+                sh 'sudo docker build -t pixvie-be .'
+                sh 'sudo docker run --name pixvie-backend -d -p 3000:3000 pixvie-be'
                 
             }
         }
