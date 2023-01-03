@@ -4,7 +4,7 @@
   "description": "Backend service of pixvie",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "DEBUG=* node src/app.js",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
