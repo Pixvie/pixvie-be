@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+    name: "pixvie-deployment-service"
+    namespace: "pixvie-backend"
+    labels:
+        app: "pixvie-be"
+spec:
+    ports:
+        - protocol: "TCP"
+          port: 3000
+    selector:
+        app: "pixvie-be"
+    type: "LoadBalancer"
+    loadBalancerIP: ""

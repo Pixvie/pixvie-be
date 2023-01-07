@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: pixvie-deployment
+    labels:
+        app: pixvie-be
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: pixvie-be
+    template:
+        metadata:
+            labels:
+                app: pixvie-be
+        spec:
+            containers:
+                - name: pixvie-be
+                  image: emrullahcirit/pixvie-be:latest
+                  ports:
+                      - containerPort: 3000
+                  env:
+                    - name: MONGODB_URI
+                      valueFrom:
+                        secretKeyRef:
+                            name: my-secret
+                            key: MONGODB_URI
