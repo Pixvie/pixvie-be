@@ -5,7 +5,7 @@ const express = require('express');
 const http = require('http');
 
 //Routes files
-const auth = require('./routes/auth');
+const auth = require('./routes/auth.route');
 const board = require('./routes/pixel.route');
 
 require('./connection.js');
@@ -34,7 +34,6 @@ const Pixel = require('./models/pixel.model');
 io.on('connection', (socket) => {
   console.log('🌊 [Server] - A user connected');
   socket.on('DRAW_PIXEL', async (payload) => {
-    console.log("mesaj geldi")
     try {
       const findPixel = await Pixel.findOne({ pos: [payload.x, payload.y] });
       if (!findPixel) {
