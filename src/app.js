@@ -1,14 +1,18 @@
 require('dotenv').config();
+
+// Dependencies
 const { Server } = require('socket.io');
 const cors = require('cors');
 const express = require('express');
 const http = require('http');
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
-//Routes files
+// Routes files
 const auth = require('./routes/auth.route');
 const board = require('./routes/pixel.route');
 
-require('./connection.js');
+require('./connection.js'); // Database connection
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -18,12 +22,22 @@ const io = new Server(server, {
   },
 });
 const port = process.env.PORT || 3000;
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(passport.initialize());
+passport.use(require('./utils/middlewares/passport.middleware'))
 
 app.use('/api/auth', auth);
 app.use('/api/board', board);
+
+app.get('/sa', passport.authenticate('jwt', {session: false}), (req, res) => {
+  res.send('Hello User!');
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
