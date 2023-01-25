@@ -32,19 +32,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 passport.use(require('./utils/middlewares/passport.middleware'))
 
-app.use('/api/auth', auth);
-app.use('/api/board', board);
+// Routes
+app.use('/auth', auth);
+app.use('/board', board);
 
 app.get('/sa', passport.authenticate('jwt', {session: false}), (req, res) => {
   res.send('Hello User!');
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Welcomo to backend service of Pixvie!');
 });
 
+// Socket.io
 const Pixel = require('./models/pixel.model');
-
 io.on('connection', (socket) => {
   console.log('🌊 [Server] - A user connected');
   socket.on('DRAW_PIXEL', async (payload) => {
