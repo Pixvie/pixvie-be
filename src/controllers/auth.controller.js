@@ -52,7 +52,8 @@ const logout = async (req, res) => {
 
 const profile = async (req, res) => {
     const decodedJWT = jwt.verify(req.cookies.jwtToken, process.env.JWT_SECRET);
-    if(decodedJWT) return res.status(200).json({ message: jwt.decode(req.cookies.jwtToken) });
+    const {_id: id, username} = jwt.decode(req.cookies.jwtToken)
+    if(decodedJWT) return res.status(200).json({ id, username });
 }
 
 
