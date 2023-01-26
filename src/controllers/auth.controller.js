@@ -42,7 +42,7 @@ const signin = async (req, res) => {
     }
     const token = jwt.sign({ _id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
     res.cookie('jwtToken', token, { httpOnly: true });
-    return res.status(200).json({ token, id: existUser._id, username: existUser.username });
+    return res.status(200).json({ id: existUser._id, username: existUser.username });
 };
 
 const logout = async (req, res) => {
