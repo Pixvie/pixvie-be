@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { registerValidation, loginValidation } = require('../utils/validations/auth.validation');
 
-const register = async (req, res) => {
+const signup = async (req, res) => {
     const { username, email, password } = req.body;
     const { error } = registerValidation({username, email, password});
     
@@ -26,7 +26,7 @@ const register = async (req, res) => {
     }
 };
 
-const login = async (req, res) => {
+const signin = async (req, res) => {
     const { email, password } = req.body;
     const { error } = loginValidation({ email, password });
     if (error) {
@@ -51,4 +51,4 @@ const logout = async (req, res) => {
 };
 
 
-module.exports = { register, login, logout };
+module.exports = { signin, signup, logout };
