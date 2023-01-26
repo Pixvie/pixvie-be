@@ -50,5 +50,11 @@ const logout = async (req, res) => {
     res.status(200).json({ message: 'User logged out' });
 };
 
+const profile = async (req, res) => {
+    const decodedJWT = jwt.verify(req.cookies.jwtToken, process.env.JWT_SECRET);
+    if(decodedJWT) return res.status(200).json({ message: jwt.decode(req.cookies.jwtToken) });
+}
 
-module.exports = { signin, signup, logout };
+
+
+module.exports = { signin, signup, logout, profile };

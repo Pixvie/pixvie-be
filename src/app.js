@@ -30,13 +30,13 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
-passport.use(require('./utils/middlewares/passport.middleware'))
+passport.use(require('./utils/middlewares/passport.middleware'));
 
 // Routes
 app.use('/auth', auth);
 app.use('/board', board);
 
-app.get('/sa', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/sa', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.send('Hello User!');
 });
 
