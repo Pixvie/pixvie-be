@@ -23,15 +23,12 @@ const io = new Server(server, {
 });
 const port = process.env.PORT || 3000;
 
+//TODO: error handling
 // Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(volleyball);
-app.use(cookieParser(process.env.COOKIE_SECRET,{
-  sameSite: 'strict',
-  httpOnly: true,
-  secure: true,
-}));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());

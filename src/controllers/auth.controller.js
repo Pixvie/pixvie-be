@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { registerValidation, loginValidation } = require('../utils/validations/auth.validation');
-
+const cookieOptions = require('../config/cookie.config');
 const signup = async (req, res) => {
     const { username, email, password } = req.body;
     const { error } = registerValidation({username, email, password});
@@ -41,7 +41,7 @@ const signin = async (req, res) => {
         return res.status(400).json({ message: 'Invalid password' });
     }
     const token = jwt.sign({ _id: existUser._id, username: existUser.username }, process.env.JWT_SECRET);
-    res.cookie('jwtToken', token, { httpOnly: true });
+    res.cookie('jwtToken', token, cookieOptions());
     return res.status(200).json({ id: existUser._id, username: existUser.username });
 };
 
