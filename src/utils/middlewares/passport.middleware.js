@@ -13,6 +13,7 @@ opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.JWT_SECRET;
 
 const jwtStrategy = new JwtStrategy(opts, function(jwt_payload, done) {
+    //TODO: change the auth massage
     User.findOne({id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);

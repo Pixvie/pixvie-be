@@ -7,7 +7,7 @@ const express = require('express');
 const http = require('http');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-
+const volleyball = require('volleyball');
 // Routes files
 const auth = require('./routes/auth.route');
 const board = require('./routes/pixel.route');
@@ -26,7 +26,12 @@ const port = process.env.PORT || 3000;
 // Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
+app.use(volleyball);
+app.use(cookieParser(process.env.COOKIE_SECRET,{
+  sameSite: 'strict',
+  httpOnly: true,
+  secure: true,
+}));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
@@ -35,10 +40,6 @@ passport.use(require('./utils/middlewares/passport.middleware'));
 // Routes
 app.use('/auth', auth);
 app.use('/board', board);
-
-app.get('/sa', passport.authenticate('jwt', { session: false }), (req, res) => {
-  res.send('Hello User!');
-});
 
 app.get('/', (req, res) => {
   res.send('Welcomo to backend service of Pixvie!');
