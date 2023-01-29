@@ -43,22 +43,12 @@ app.get('/', (req, res) => {
 });
 
 // Socket.io
-const Pixel = require('./models/pixel.model');
-io.on('connection', (socket) => {
-  console.log('🌊 [Server] - A user connected');
-  socket.on('DRAW_PIXEL', async (payload) => {
-    try {
-      const findPixel = await Pixel.findOne({ pos: [payload.x, payload.y] });
-      if (!findPixel) {
-        const newPixel = new Pixel({ pos: [payload.x, payload.y], color: payload.color });
-        await newPixel.save();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    socket.broadcast.emit('DRAWED_PIXEL', payload);
-  });
-});
+const registerDrawingHandler = require('./events/drawing.event');
+const onConnection = (socket) => {
+  registerDrawingHandler(io, socket);
+}
+
+io.on("connection", onConnection);
 
 server.listen(port, () => {
   console.log(`🌊 [Server] - Listening on ${port}`);

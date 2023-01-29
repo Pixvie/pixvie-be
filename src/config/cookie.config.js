@@ -3,7 +3,7 @@ const cookieConfig = () => {
     const options = {
         httpOnly: isProduction ? true : false,
         secure: isProduction ? true : false,
-        sameSite: isProduction ? 'none' : 'strict',
+        sameSite: isProduction ? 'none' : 'lax',
     }
     return options;
 }
