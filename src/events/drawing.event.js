@@ -1,4 +1,4 @@
-const Pixel = require('./models/pixel.model');
+const Pixel = require('../models/pixel.model');
 
 module.exports = (io, socket) => {
   const drawPixel = async (payload) => {
