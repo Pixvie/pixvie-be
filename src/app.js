@@ -44,8 +44,10 @@ app.get('/', (req, res) => {
 
 // Socket.io
 const registerDrawingHandler = require('./events/drawing.event');
+const registerChatHandler = require('./events/chat.event');
 const onConnection = (socket) => {
   registerDrawingHandler(io, socket);
+  registerChatHandler(io, socket);
 }
 
 io.on("connection", onConnection);
