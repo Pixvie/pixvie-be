@@ -16,6 +16,7 @@ require('./connection.js'); // Database connection
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
+  path: '/socket',
   cors: {
     origin: '*',
     methods: ['GET', 'POST', 'OPTIONS'],
