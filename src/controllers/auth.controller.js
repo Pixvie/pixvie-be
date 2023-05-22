@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { registerValidation, loginValidation } = require('../utils/validations/auth.validation');
 const cookieOptions = require('../config/cookie.config');
+
 const signup = async (req, res) => {
     const { username, email, password } = req.body;
     const { error } = registerValidation({username, email, password});
