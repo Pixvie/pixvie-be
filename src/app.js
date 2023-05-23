@@ -46,9 +46,14 @@ app.get('/', (req, res) => {
 // Socket.io
 const registerDrawingHandler = require('./events/drawing.event');
 const registerChatHandler = require('./events/chat.event');
+const registerDisconnectHandler = require('./events/disconnect.event');
 const onConnection = (socket) => {
+  let totalPlayerCount = io.engine.clientsCount;
+  io.emit('TOTAL_PLAYER', totalPlayerCount);
+
   registerDrawingHandler(io, socket);
   registerChatHandler(io, socket);
+  registerDisconnectHandler(io, socket);
 };
 
 io.on('connection', onConnection);

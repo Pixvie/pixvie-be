@@ -7,6 +7,9 @@ module.exports = (io, socket) => {
       if (!findPixel) {
         const newPixel = new Pixel({ pos: [payload.x, payload.y], color: payload.color });
         await newPixel.save();
+      } else {
+        findPixel.color = payload.color;
+        await findPixel.save();
       }
     } catch (error) {
       console.log(error);
