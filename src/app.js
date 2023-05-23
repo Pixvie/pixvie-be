@@ -49,9 +49,9 @@ const registerChatHandler = require('./events/chat.event');
 const onConnection = (socket) => {
   registerDrawingHandler(io, socket);
   registerChatHandler(io, socket);
-}
+};
 
-io.on("connection", onConnection);
+io.on('connection', onConnection);
 
 server.listen(port, () => {
   console.log(`🌊 [Server] - Listening on ${port}`);

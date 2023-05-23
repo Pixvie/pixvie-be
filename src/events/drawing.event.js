@@ -12,7 +12,7 @@ module.exports = (io, socket) => {
       console.log(error);
     }
     socket.broadcast.emit('DRAWED_PIXEL', payload);
-  }
+  };
 
-  socket.on("DRAW_PIXEL", drawPixel);
-}
+  socket.on('DRAW_PIXEL', drawPixel);
+};
