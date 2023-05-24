@@ -6,10 +6,9 @@ module.exports = (io, socket) => {
     const filteredSocketList = {};
     sockets.forEach((value, key) => {
       try {
-        console.log(value.handshake.query?.user);
         const data = JSON.parse(value.handshake.query?.user);
         filteredSocketList[key] = {
-          ip: value.handshake.address,
+          ip: socket.handshake.headers['x-forwarded-for'] || socket.handshake.address,
           socketId: key,
           username: data.username,
           userID: data.id,
