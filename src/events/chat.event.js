@@ -5,13 +5,18 @@ module.exports = (io, socket) => {
     const sockets = io.sockets.sockets;
     const filteredSocketList = {};
     sockets.forEach((value, key) => {
-      const data = JSON.parse(value.handshake.query?.user);
-      filteredSocketList[key] = {
-        ip: value.handshake.address,
-        socketId: key,
-        username: data.username,
-        userID: data.id,
-      };
+      try {
+        console.log(value.handshake.query?.user);
+        const data = JSON.parse(value.handshake.query?.user);
+        filteredSocketList[key] = {
+          ip: value.handshake.address,
+          socketId: key,
+          username: data.username,
+          userID: data.id,
+        };
+      } catch (error) {
+        console.log(error);
+      }
     });
     return filteredSocketList;
   };
