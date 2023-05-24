@@ -9,23 +9,23 @@ const getPixelBoard = async (req, res) => {
   }
 };
 
-const createPixel = async (req, res) => {
-  const { x, y, color } = req.body;
-  const findPixel = await Pixel.findOne({ pos: [x, y] });
-  if (findPixel) {
-    res.status(409).json({ message: 'Pixel already exists' });
-  } else {
-    const newPixel = new Pixel({ pos: [x, y], color });
-    try {
-      await newPixel.save();
-      res.status(201).json(newPixel);
-    } catch (error) {
-      res.status(409).json({ message: error.message });
-    }
-  }
-};
+// const createPixel = async (req, res) => {
+//   const { x, y, color, username } = req.body;
+//   const findPixel = await Pixel.findOne({ pos: [x, y] });
+//   if (findPixel) {
+//     res.status(409).json({ message: 'Pixel already exists' });
+//   } else {
+//     const newPixel = new Pixel({ pos: [x, y], color, owner: username });
+//     try {
+//       await newPixel.save();
+//       res.status(201).json(newPixel);
+//     } catch (error) {
+//       res.status(409).json({ message: error.message });
+//     }
+//   }
+// };
 
 module.exports = {
   getPixelBoard,
-  createPixel,
+  // createPixel,
 };

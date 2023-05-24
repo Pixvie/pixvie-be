@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { getPixelBoard, createPixel } = require('../controllers/pixel.controller');
+const { getPixelBoard } = require('../controllers/pixel.controller');
 
 router.get('/', getPixelBoard);
-router.post('/', createPixel);
+//router.post('/', createPixel);
 
 module.exports = router;
