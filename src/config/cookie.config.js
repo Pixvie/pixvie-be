@@ -4,7 +4,7 @@ const cookieConfig = () => {
     httpOnly: isProduction ? true : false,
     secure: isProduction ? true : false,
     sameSite: isProduction ? 'none' : 'lax',
-    domain: 'pixvie.tech',
+    domain: '.pixvie.tech',
   };
   return options;
 };
